@@ -13,7 +13,7 @@
 <body style="text-align: center; padding: 0; border: 0; margin: 0;">
 <canvas id="unity-canvas" tabindex="-1"
         style="width: 100vw; height: 100vh; background: #231F20"></canvas>
-<script src="Build/getsu-coin-web.loader.js"></script>
+<script src="Build/getsu-coin-web-dev.loader.js"></script>
 <script>
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
@@ -31,9 +31,9 @@
     }
 
     createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/getsu-coin-web.data",
-        frameworkUrl: "Build/getsu-coin-web.framework.js",
-        codeUrl: "Build/getsu-coin-web.wasm",
+        dataUrl: "Build/getsu-coin-web-dev.data",
+        frameworkUrl: "Build/getsu-coin-web-dev.framework.js",
+        codeUrl: "Build/getsu-coin-web-dev.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Getsu",
     productName: "Getsu Tap _ Earn",
