@@ -30,30 +30,10 @@
         frameworkUrl: "Build/getsu-coin-web-dev.framework.js",
         codeUrl: "Build/getsu-coin-web-dev.wasm",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: {
-    {
-        {
-            JSON.stringify(COMPANY_NAME)
-        }
-    }
-    },
-    productName: {
-        {
-            {
-                JSON.stringify(PRODUCT_NAME)
-            }
-        }
-    }
-    ,
-    productVersion: {
-        {
-            {
-                JSON.stringify(PRODUCT_VERSION)
-            }
-        }
-    }
-    }
-    ;
+        companyName: "Getsu",
+        productName: "Getsu Tap _ Earn",
+        productVersion: "0.1.1",
+    };
 
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
@@ -83,6 +63,7 @@
         console.log('Instance created', window.Telegram.WebApp);
         window.unityInstance = unityInstance;
         window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
+        window.Telegram.WebApp.expand = true;
     });
 
     function progressHandler(progress) {
