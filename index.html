@@ -4,17 +4,66 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Getsu: Tap _ Earn</title>
+    <title>Unity WebGL Player | Getsu Tap _ Earn</title>
 
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        #loading-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #unity-loading-bar {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #unity-progress-bar-empty {
+            width: 80%;
+            height: 24px;
+            margin: 10px 20px 20px 10px;
+            text-align: left;
+            border: 1px solid white;
+            padding: 2px;
+        }
+        #unity-progress-bar-full {
+            width: 0%;
+            height: 100%;
+            background: white;
+        }
+        .light #unity-progress-bar-empty {
+            border-color: black;
+        }
+        .light #unity-progress-bar-full {
+            background: black;
+        }
+    </style>
 </head>
 
 <body style="text-align: center; padding: 0; border: 0; margin: 0;">
 <canvas id="unity-canvas" tabindex="-1"
         style="width: 100vw; height: 100vh; background: #231F20"></canvas>
-<script src="Build/getsu-coin-web.loader.js"></script>
+<script src="Build/getsu-coin-web-dev.loader.js"></script>
 <script>
+    var canvas = document.querySelector("#unity-canvas");
+    var config = {
+        dataUrl: "Build/getsu-coin-web-dev.data",
+        frameworkUrl: "Build/getsu-coin-web-dev.framework.js",
+        codeUrl: "Build/getsu-coin-web-dev.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Getsu",
+        productName: "Getsu Tap _ Earn",
+        productVersion: "0.1.1"
+    };
+
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
         var meta = document.createElement('meta');
@@ -30,28 +79,31 @@
         document.body.style.textAlign = "left";
     }
 
-    createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/getsu-coin-web.data",
-        frameworkUrl: "Build/getsu-coin-web.framework.js",
-        codeUrl: "Build/getsu-coin-web.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "Getsu",
-    productName: "Getsu: Tap _ Earn",
-    productVersion: "0.1.1",
+    const loadingCover = document.querySelector("#loading-cover");
+    const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+    const progressBarFull = document.querySelector("#unity-progress-bar-full");
+
+    createUnityInstance(canvas, config, progressHandler
     // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
     // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-    }).then((unityInstance) => {
-        console.log('Instance created',window.Telegram.WebApp);
+    ).then((unityInstance) => {
+        loadingCover.style.display = "none";
+        console.log('Instance created', window.Telegram.WebApp);
         window.unityInstance = unityInstance;
         window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
     });
+
+    function progressHandler(progress) {
+        progressBarEmpty.style.display = "";
+        progressBarFull.style.width = `${100 * progress}%`;
+    }
 </script>
 
 <script>
-    if(window.Telegram.WebApp){
-        window.Telegram.WebApp.onEvent('qrTextReceived',async (obj)=>{
-            console.log('#qrTextReceived',obj)
-            if( window.unityInstance){
+    if (window.Telegram.WebApp) {
+        window.Telegram.WebApp.onEvent('qrTextReceived', async (obj) => {
+            console.log('#qrTextReceived', obj)
+            if (window.unityInstance) {
                 window.unityInstance.SendMessage("TelegramController", "OnQrDetected", obj.data);
             }
         })
