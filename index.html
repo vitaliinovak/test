@@ -63,7 +63,6 @@
         console.log('Instance created', window.Telegram.WebApp);
         window.unityInstance = unityInstance;
         window.unityInstance.SendMessage("TelegramController", "SetWebAppUser", JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user));
-        window.Telegram.WebApp.expand();
     });
 
     function progressHandler(progress) {
@@ -74,6 +73,7 @@
 
 <script>
     if (window.Telegram.WebApp) {
+        window.Telegram.WebApp.expand();
         window.Telegram.WebApp.onEvent('qrTextReceived', async (obj) => {
             console.log('#qrTextReceived', obj)
             if (window.unityInstance) {
