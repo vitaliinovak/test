@@ -23,7 +23,7 @@
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Getsu",
         productName: "Getsu Tap _ Earn",
-        productVersion: "0.2.5"
+        productVersion: "0.3.0"
     };
 
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
@@ -60,6 +60,7 @@
 <script>
     if (window.Telegram.WebApp) {
         window.Telegram.WebApp.expand();
+        window.Telegram.WebApp.setHeaderColor('#000000');
         window.Telegram.WebApp.onEvent('qrTextReceived', async (obj) => {
             console.log('#qrTextReceived', obj)
             if (window.unityInstance) {
