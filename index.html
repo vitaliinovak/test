@@ -61,6 +61,8 @@
     if (window.Telegram.WebApp) {
         window.Telegram.WebApp.expand();
         window.Telegram.WebApp.setHeaderColor('#000000');
+        window.Telegram.WebApp.setBackgroundColor('#000000');
+        window.Telegram.WebApp.setBottomBarColor('#000000');
         window.Telegram.WebApp.onEvent('qrTextReceived', async (obj) => {
             console.log('#qrTextReceived', obj)
             if (window.unityInstance) {
