@@ -59,7 +59,7 @@
             background-color: #ffffff;
         }
     </style>
-    <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 <div id="unity-container">
@@ -72,16 +72,16 @@
 </div>
 <script>
     const buildUrl = "Build";
-    const loaderUrl = buildUrl + "/test.loader.js";
+    const loaderUrl = buildUrl + "/GetsuCoin.loader.js";
 
     const config = {
-        dataUrl: buildUrl + "/test.data",
-        frameworkUrl: buildUrl + "/test.framework.js",
-        codeUrl: buildUrl + "/test.wasm",
+        dataUrl: buildUrl + "/GetsuCoin.data",
+        frameworkUrl: buildUrl + "/GetsuCoin.framework.js",
+        codeUrl: buildUrl + "/GetsuCoin.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Getsu",
         productName: "Getsu Tap _ Earn",
-        productVersion: "0.5.0",
+        productVersion: "0.6.0",
     };
 
     const canvas = document.querySelector("#unity-canvas");
