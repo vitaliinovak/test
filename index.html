@@ -81,7 +81,7 @@
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Getsu",
         productName: "Getsu Tap _ Earn",
-        productVersion: "0.6.0",
+        productVersion: "0.10.0",
     };
 
     const canvas = document.querySelector("#unity-canvas");
@@ -100,9 +100,11 @@
     script.src = loaderUrl;
 
     script.onload = () => {
+        window.unityInstance = null;
         createUnityInstance(canvas, config, (progress) => {
             progressBarFull.style.width = `${progress * 100}%`;
         }).then((unityInstance) => {
+            window.unityInstance = unityInstance;
             loadingCover.style.display = "none";
         }).catch((message) => {
             console.error("Error creating Unity instance: ", message);
