@@ -70,9 +70,6 @@
         <div id="unity-progress-bar-full"></div>
     </div>
 </div>
-<input id="nativeInput" type="text"
-       style="position: absolute; top: -1000px; left: -1000px;"
-       oninput="sendToUnity(this.value)" />
 <script>
     const buildUrl = "Build";
     const loaderUrl = buildUrl + "/GetsuCoin.loader.js";
@@ -115,28 +112,6 @@
     };
 
     document.body.appendChild(script);
-</script>
-
-<script>
-    function sendToUnity(value) {
-        // Надсилає в Unity
-        if (typeof unityInstance !== 'undefined') {
-            unityInstance.SendMessage('WebGLInputBridge', 'ReceiveInput', value);
-        }
-    }
-
-    function focusInput() {
-        document.getElementById("nativeInput").style.top = "50%"; // поки що — для тесту
-        document.getElementById("nativeInput").style.left = "50%";
-        document.getElementById("nativeInput").focus();
-    }
-
-    function hideInput() {
-        const input = document.getElementById("nativeInput");
-        input.blur();
-        input.style.top = "-1000px";
-        input.style.left = "-1000px";
-    }
 </script>
 
 <script>
