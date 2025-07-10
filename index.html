@@ -71,6 +71,17 @@
     </div>
 </div>
 <script>
+    document.addEventListener('touchstart', function () {
+        setTimeout(function () {
+            var inputs = document.querySelectorAll("input, textarea");
+            if (inputs.length > 0) {
+                var input = inputs[inputs.length - 1];
+                input.focus();
+                input.setSelectionRange(input.value.length, input.value.length);
+            }
+        }, 100); // Give Unity time to create the input
+    }, true); // Use capture phase
+    
     const buildUrl = "Build";
     const loaderUrl = buildUrl + "/GetsuCoin.loader.js";
 
