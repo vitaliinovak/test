@@ -70,18 +70,19 @@
         <div id="unity-progress-bar-full"></div>
     </div>
 </div>
+<input id="mobileInput"
+       type="text"
+       style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+              font-size: 24px; padding: 10px; z-index: 9999; display: none;"
+       oninput="unityInputChange(this.value)">
 <script>
-    document.addEventListener('touchstart', function () {
-        setTimeout(function () {
-            var inputs = document.querySelectorAll("input, textarea");
-            if (inputs.length > 0) {
-                var input = inputs[inputs.length - 1];
-                input.focus();
-                input.setSelectionRange(input.value.length, input.value.length);
-            }
-        }, 100); // Give Unity time to create the input
-    }, true); // Use capture phase
-    
+    function unityInputChange(val) {
+        if (typeof unityInstance !== 'undefined') {
+            unityInstance.SendMessage("WebGlInputHelper", "OnInputChange", val);
+        }
+    }
+</script>
+<script>
     const buildUrl = "Build";
     const loaderUrl = buildUrl + "/GetsuCoin.loader.js";
 
